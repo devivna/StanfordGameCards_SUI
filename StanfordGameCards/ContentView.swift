@@ -8,14 +8,89 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var vM: ViewModel
+    
+    var names = ["car", "carrot", "simcard", "train.side.rear.car", "binoculars", "xmark.bin", "eraser", "pencil.tip", "folder", "paperplane", "note.text", "book", "backpack", "paperclip", "person.fill", "figure.arms.open", "soccerball", "baseball", "volleyball", "globe"]
+    
+    let widthCard: CGFloat = 80
+    
+    @State private var countCards = 20 // images.count
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: widthCard))]) {
+                ForEach(names[0..<countCards], id: \.self) { image in
+                   CardView(imageName: image)
+                }
+            }
+  
+            HStack {
+                removeCard
+                Spacer()
+                addCard
+            }
+            .padding(.vertical, 5)
+            .padding(.horizontal)
         }
         .padding()
+    }
+    
+    var removeCard: some View {
+        Button {
+            if countCards > 1 {
+                countCards -= 1
+            }
+        } label: {
+            ImageButtonView(name: "minus.circle")
+        }
+    }
+    var addCard: some View {
+        Button {
+            if countCards < names.count {
+                countCards += 1
+            }
+            
+        } label: {
+            ImageButtonView(name: "plus.circle")
+        }
+    }
+}
+
+struct ImageButtonView: View {
+    var name: String
+    var body: some View {
+        Image(systemName: name)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 40, height: 40)
+    }
+}
+
+
+struct CardView: View {
+    
+    var imageName: String
+    let heightCard: CGFloat = 100
+
+    @State private var isOpen = true // ? State private
+
+    var body: some View {
+        Image(systemName: imageName)
+            .resizable()
+            .scaledToFit()
+            .frame(height: heightCard)
+            .foregroundColor(.orange)
+            .fontWeight(.light)
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill( isOpen ? .cyan.opacity(0.2) : .cyan.opacity(1))
+            }
+            .onTapGesture {
+                isOpen.toggle()
+            }
     }
 }
 
