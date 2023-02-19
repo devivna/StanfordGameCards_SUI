@@ -25,36 +25,8 @@ struct ContentView: View {
                    CardView(imageName: image)
                 }
             }
-  
-            HStack {
-                removeCard
-                Spacer()
-                addCard
-            }
-            .padding(.vertical, 5)
-            .padding(.horizontal)
         }
         .padding()
-    }
-    
-    var removeCard: some View {
-        Button {
-            if countCards > 1 {
-                countCards -= 1
-            }
-        } label: {
-            ImageButtonView(name: "minus.circle")
-        }
-    }
-    var addCard: some View {
-        Button {
-            if countCards < names.count {
-                countCards += 1
-            }
-            
-        } label: {
-            ImageButtonView(name: "plus.circle")
-        }
     }
 }
 
