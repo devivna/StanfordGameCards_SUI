@@ -7,13 +7,12 @@
 
 import Foundation
 
-class ViewModel: ObservableObject {
+class EmojiMemoryGame {
     
-    @Published var images : [Model] = []
+    //private var model: MemoryGame<String>
     
-    init() {
-        var names = ["car", "carrot", "simcard", "train.side.rear.car", "binoculars", "xmark.bin", "eraser", "pencil.tip", "folder", "paperplane", "note.text", "book", "backpack", "paperclip", "person.fill", "figure.arms.open", "soccerball", "baseball", "volleyball", "globe"]
-        
-        names.forEach { images.append(Model(name: $0)) }
-    }
+    //    var cards: Array<MemoryGame<String>.Card> {
+    //        return model.cards
+    //    }
+    
 }
